@@ -1,0 +1,28 @@
+package com.miage.altea.game_ui.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class IndexController {
+
+    private String name = "";
+    //private String[] mapping = "/" ;
+
+    public IndexController(){
+        name = "index";
+    }
+
+    @GetMapping(value="/")
+    public String index(){
+        return name;
+    }
+
+    @GetMapping(value="/registerTrainer")
+    ModelAndView registerNewTrainer(String trainerName){
+        var modelAndView = new ModelAndView("register");
+        modelAndView.addObject("name", trainerName);
+        return modelAndView;
+    }
+}
