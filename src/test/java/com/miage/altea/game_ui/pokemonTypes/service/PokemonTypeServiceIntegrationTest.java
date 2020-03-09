@@ -17,7 +17,7 @@ class PokemonTypeServiceIntegrationTest {
     RestTemplate restTemplate;
 
     @Test
-    void serviceAndTemplateShouldNotBeNull(){
+    void serviceAndTemplateShouldNotBeNull() {
         assertNotNull(service);
         assertNotNull(restTemplate);
     }

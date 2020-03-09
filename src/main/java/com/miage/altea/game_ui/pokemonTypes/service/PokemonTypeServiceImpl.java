@@ -29,7 +29,7 @@ public class PokemonTypeServiceImpl implements PokemonTypeService{
 
     }
 
-    //@Value("${pokemon.service.url}")
+    @Value("${pokemonType.service.url}")
     void setPokemonTypeServiceUrl(String pokemonServiceUrl) {
         this.pokemonServiceUrl = pokemonServiceUrl;
     }
