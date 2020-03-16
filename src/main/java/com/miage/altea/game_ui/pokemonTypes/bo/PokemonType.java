@@ -12,14 +12,6 @@ public class PokemonType {
     private int weight;
     private List<String> types;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getBaseExperience() {
         return baseExperience;
     }
@@ -74,5 +66,13 @@ public class PokemonType {
 
     public void setTypes(List<String> types) {
         this.types = types;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

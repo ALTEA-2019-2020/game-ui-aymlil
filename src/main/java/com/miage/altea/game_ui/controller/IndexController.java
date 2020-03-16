@@ -8,22 +8,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    private String name = "";
-    //private String[] mapping = "/" ;
-
-    public IndexController(){
-        name = "index";
-    }
-
-    @GetMapping(value="/")
+    @GetMapping("/")
     public String index(){
-        return name;
+        return "index";
     }
 
-    @PostMapping(value="/registerTrainer")
+    @PostMapping("/registerTrainer")
     ModelAndView registerNewTrainer(String trainerName){
-        var modelAndView = new ModelAndView("register");
-        modelAndView.addObject("name", trainerName);
-        return modelAndView;
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("register");
+        mav.addObject("name", trainerName);
+        return mav;
     }
 }

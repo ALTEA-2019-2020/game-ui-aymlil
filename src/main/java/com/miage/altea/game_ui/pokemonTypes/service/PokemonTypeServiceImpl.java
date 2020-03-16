@@ -10,29 +10,24 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class PokemonTypeServiceImpl implements PokemonTypeService{
+public class PokemonTypeServiceImpl implements PokemonTypeService {
 
     private RestTemplate restTemplate;
-
-    private String pokemonServiceUrl = "";
-
+    private String pokemonServiceUrl;
+    //private LocaleContextHolder localeContextHolder;
 
     public List<PokemonType> listPokemonsTypes() {
-        var url = pokemonServiceUrl + "/pokemon-types/";
-        var pokemons = restTemplate.getForObject(url, PokemonType[].class);
-        return Arrays.asList(pokemons);
+        System.out.println(pokemonServiceUrl+"pokemon-types/");
+        return Arrays.asList(restTemplate.getForObject(pokemonServiceUrl+"pokemon-types/", PokemonType[].class));
     }
 
     @Autowired
     void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate ;
-
+        this.restTemplate = restTemplate;
     }
 
     @Value("${pokemonType.service.url}")
     void setPokemonTypeServiceUrl(String pokemonServiceUrl) {
         this.pokemonServiceUrl = pokemonServiceUrl;
     }
-
-
 }
