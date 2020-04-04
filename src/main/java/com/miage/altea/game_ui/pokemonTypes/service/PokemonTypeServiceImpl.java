@@ -14,20 +14,25 @@ public class PokemonTypeServiceImpl implements PokemonTypeService {
 
     private RestTemplate restTemplate;
     private String pokemonServiceUrl;
-    //private LocaleContextHolder localeContextHolder;
 
-    public List<PokemonType> listPokemonsTypes() {
-        System.out.println(pokemonServiceUrl+"pokemon-types/");
-        return Arrays.asList(restTemplate.getForObject(pokemonServiceUrl+"pokemon-types/", PokemonType[].class));
+    @Override
+    public List<PokemonType> listPokemonsTypes(){
+        return Arrays.asList(restTemplate.getForObject(pokemonServiceUrl+"/pokemon-types/", PokemonType[].class));
+    }
+
+    @Override
+    public PokemonType getPokemonType(int id) {
+        var pokemon = restTemplate.getForObject(pokemonServiceUrl+"/pokemon-types/{id}",PokemonType.class,id);
+        return pokemon;
     }
 
     @Autowired
-    void setRestTemplate(RestTemplate restTemplate) {
+    public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @Value("${pokemonType.service.url}")
-    void setPokemonTypeServiceUrl(String pokemonServiceUrl) {
+    public void setPokemonTypeServiceUrl(String pokemonServiceUrl) {
         this.pokemonServiceUrl = pokemonServiceUrl;
     }
 }

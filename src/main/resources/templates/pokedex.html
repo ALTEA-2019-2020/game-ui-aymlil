@@ -23,6 +23,11 @@
                     <span class="badge badge-primary">Defense : {{stats.defense}}</span>
                     <span class="badge badge-primary">HP : {{stats.hp}}</span>
                 </div>
+                <div class="card-body">
+                    {{#types}}
+                    <span class="badge badge-secondary">{{this}}</span>
+                    {{/types}}
+                </div>
             </div>
         </div>
         {{/pokemonTypes}}
