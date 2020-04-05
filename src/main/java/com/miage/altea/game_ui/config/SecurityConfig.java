@@ -17,14 +17,14 @@ import java.util.Optional;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private TrainerService trainerService;
+    private TrainerService trainerS;
 
-    public TrainerService getTrainerService() {
-        return trainerService;
+    public TrainerService getTrainerS() {
+        return trainerS;
     }
 
-    public void setTrainerService(TrainerService trainerService) {
-        this.trainerService = trainerService;
+    public void setTrainerS(TrainerService trainerS) {
+        this.trainerS = trainerS;
     }
 
     @Bean
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        return username -> Optional.ofNullable(trainerService.getTrainerByName(username)).map(trainer ->
+        return username -> Optional.ofNullable(trainerS.getTrainerByName(username)).map(trainer ->
                 User.withUsername(trainer.getName()).password(trainer.getPassword()).roles("USER").build())
                 .orElseThrow(() -> new BadCredentialsException("No such user"));
     }

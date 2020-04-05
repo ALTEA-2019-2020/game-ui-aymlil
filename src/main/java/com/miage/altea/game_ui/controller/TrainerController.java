@@ -17,25 +17,22 @@ import java.util.List;
 public class TrainerController {
 
     @Autowired
-    private TrainerService trainerService;
+    private TrainerService trainerS;
 
     @Autowired
-    private PokemonTypeService pokemonService;
+    private PokemonTypeService pokemonS;
 
-    public void setTrainerService(TrainerService trainerService){
-        this.trainerService = trainerService;
+    public void setTrainerS(TrainerService trainerS){
+        this.trainerS = trainerS;
     }
 
     @GetMapping("/trainers")
     public ModelAndView trainers(Principal p){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("trainers");
-
-        List<Trainer> allTrainers = trainerService.listTrainer();
-        allTrainers = new ArrayList<Trainer>(allTrainers);
-        allTrainers.removeIf(t -> t.getName().equals(p.getName()));
-
-        mav.addObject("user", trainerService.getTrainerByName(p.getName()));
+        List<Trainer> allTrainers = new ArrayList<Trainer>(trainerS.listTrainer());
+        allTrainers.removeIf(trainer -> trainer.getName().equals(p.getName()));
+        mav.addObject("user", trainerS.getTrainerByName(p.getName()));
         mav.addObject("trainers", allTrainers);
 
         return mav;
@@ -45,18 +42,16 @@ public class TrainerController {
     public ModelAndView trainersDetails(@PathVariable String name){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("trainerDetails");
-        mav.addObject("trainers", trainerService.getTrainerByName(name));
+        mav.addObject("trainers", trainerS.getTrainerByName(name));
         return mav;
     }
 
     @GetMapping("/profile")
     public ModelAndView profile(Principal p){
-
         ModelAndView mav = new ModelAndView();
         mav.setViewName("profile");
-        mav.addObject("trainer", trainerService.getTrainerByName(p.getName()));
-        mav.addObject("user", trainerService.getTrainerByName(p.getName()));
-
+        mav.addObject("trainer", trainerS.getTrainerByName(p.getName()));
+        mav.addObject("user", trainerS.getTrainerByName(p.getName()));
         return mav;
     }
 }

@@ -15,12 +15,9 @@ public class Interceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest httpRequest, byte[] bytes, ClientHttpRequestExecution clientHttpRequestExecution) throws IOException {
-        HttpHeaders headers = httpRequest.getHeaders();
         List<Locale.LanguageRange> language = new ArrayList<Locale.LanguageRange>();
         language.add(new Locale.LanguageRange("fr"));
-        if (!headers.containsKey("Accept-language")) {
-            headers.setAcceptLanguage(language);
-        }
+        if (!httpRequest.getHeaders().containsKey("Accept-language")) { httpRequest.getHeaders().setAcceptLanguage(language); }
         return clientHttpRequestExecution.execute(httpRequest, bytes);
 
     }

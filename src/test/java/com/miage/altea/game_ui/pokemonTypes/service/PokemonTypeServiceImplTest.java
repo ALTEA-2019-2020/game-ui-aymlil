@@ -18,7 +18,7 @@ class PokemonTypeServiceImplTest {
 
         var restTemplate = mock(RestTemplate.class);
         var pokemonServiceImpl = new PokemonTypeServiceImpl();
-        pokemonServiceImpl.setRestTemplate(restTemplate);
+        pokemonServiceImpl.setTemplate(restTemplate);
         pokemonServiceImpl.setPokemonTypeServiceUrl(url);
 
         var pikachu = new PokemonType();
@@ -43,7 +43,7 @@ class PokemonTypeServiceImplTest {
 
     @Test
     void setRestTemplate_shouldBeAnnotatedWithAutowired() throws NoSuchMethodException {
-        var setRestTemplateMethod = PokemonTypeServiceImpl.class.getDeclaredMethod("setRestTemplate", RestTemplate.class);
+        var setRestTemplateMethod = PokemonTypeServiceImpl.class.getDeclaredMethod("setTemplate", RestTemplate.class);
         assertNotNull(setRestTemplateMethod.getAnnotation(Autowired.class));
     }
 

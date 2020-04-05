@@ -12,27 +12,26 @@ import java.util.List;
 @Service
 public class PokemonTypeServiceImpl implements PokemonTypeService {
 
-    private RestTemplate restTemplate;
-    private String pokemonServiceUrl;
+    private RestTemplate template;
+    private String pokemonsUrl;
 
     @Override
     public List<PokemonType> listPokemonsTypes(){
-        return Arrays.asList(restTemplate.getForObject(pokemonServiceUrl+"/pokemon-types/", PokemonType[].class));
+        return Arrays.asList(template.getForObject(pokemonsUrl +"/pokemon-types/", PokemonType[].class));
     }
 
     @Override
     public PokemonType getPokemonType(int id) {
-        var pokemon = restTemplate.getForObject(pokemonServiceUrl+"/pokemon-types/{id}",PokemonType.class,id);
-        return pokemon;
+        return template.getForObject(pokemonsUrl +"/pokemon-types/{id}",PokemonType.class,id);
     }
 
     @Autowired
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public void setTemplate(RestTemplate template) {
+        this.template = template;
     }
 
     @Value("${pokemonType.service.url}")
-    public void setPokemonTypeServiceUrl(String pokemonServiceUrl) {
-        this.pokemonServiceUrl = pokemonServiceUrl;
+    public void setPokemonTypeServiceUrl(String pokemonsUrl) {
+        this.pokemonsUrl = pokemonsUrl;
     }
 }

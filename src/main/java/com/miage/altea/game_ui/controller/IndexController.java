@@ -14,10 +14,10 @@ public class IndexController {
     }
 
     @PostMapping("/registerTrainer")
-    public ModelAndView registerNewTrainer(String trainerName){
+    public ModelAndView registerTrainer(String tName){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("register");
-        mav.addObject("name", trainerName);
+        mav.addObject("name", tName);
         return mav;
     }
 }

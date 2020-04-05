@@ -24,7 +24,7 @@ class PokemonTypeControllerTest {
         when(pokemonTypeService.listPokemonsTypes()).thenReturn(List.of(new PokemonType(), new PokemonType()));
 
         var pokemonTypeController = new PokemonTypeController();
-        pokemonTypeController.setPokemonTypeService(pokemonTypeService);
+        pokemonTypeController.setPokemonTypeS(pokemonTypeService);
         var modelAndView = pokemonTypeController.pokedex();
 
         assertEquals("pokedex", modelAndView.getViewName());

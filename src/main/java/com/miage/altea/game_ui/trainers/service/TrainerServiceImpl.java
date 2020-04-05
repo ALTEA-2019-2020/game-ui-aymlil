@@ -15,17 +15,17 @@ import java.util.List;
 @Service
 public class TrainerServiceImpl implements TrainerService {
 
-    private RestTemplate restTemplate;
-    private String trainerServiceUrl;
-    private PokemonTypeService pokemonTypeService;
+    private RestTemplate template;
+    private String trainersUrl;
+    private PokemonTypeService pokemonTypeS;
 
     @Override
     public List<Trainer> listTrainer() {
-        Trainer[] tList =  restTemplate.getForObject(trainerServiceUrl+"/trainers/", Trainer[].class);
+        Trainer[] tList =  template.getForObject(trainersUrl +"/trainers/", Trainer[].class);
         List<Trainer> trainersList = Arrays.asList(tList);
         for(Trainer t : tList){
             for(Pokemon pok : t.getTeam()){
-                pok.setPt(pokemonTypeService.getPokemonType(pok.getPokemonTypeId()));
+                pok.setPt(pokemonTypeS.getPokemonType(pok.getPokemonTypeId()));
             }
         }
         return trainersList;
@@ -33,26 +33,26 @@ public class TrainerServiceImpl implements TrainerService {
 
     @Override
     public Trainer getTrainerByName(String name) {
-        Trainer t = restTemplate.getForObject(trainerServiceUrl+"/trainers/"+name+"/", Trainer.class);
+        Trainer t = template.getForObject(trainersUrl +"/trainers/"+name+"/", Trainer.class);
         for(Pokemon pok : t.getTeam()){
-            pok.setPt(pokemonTypeService.getPokemonType(pok.getPokemonTypeId()));
+            pok.setPt(pokemonTypeS.getPokemonType(pok.getPokemonTypeId()));
         }
         return t;
     }
 
     @Autowired
     @Qualifier("trainerApiRestTemplate")
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public void setTemplate(RestTemplate template) {
+        this.template = template;
     }
 
     @Value("${trainer.service.url}")
-    public void setTrainerServiceUrl(String trainerServiceUrl) {
-        this.trainerServiceUrl =trainerServiceUrl;
+    public void setTrainersUrl(String trainersUrl) {
+        this.trainersUrl = trainersUrl;
     }
 
     @Autowired
-    public void setPokemonTypeService(PokemonTypeService pokemonTypeService) {
-        this.pokemonTypeService = pokemonTypeService;
+    public void setPokemonTypeS(PokemonTypeService pokemonTypeS) {
+        this.pokemonTypeS = pokemonTypeS;
     }
 }

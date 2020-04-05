@@ -8,7 +8,7 @@ import java.util.List;
 public interface PokemonTypeService {
     List<PokemonType> listPokemonsTypes();
     PokemonType getPokemonType(int id);
-    void setRestTemplate(RestTemplate restTemplate);
-    void setPokemonTypeServiceUrl(String pokemonServiceUrl);
+    void setTemplate(RestTemplate template);
+    void setPokemonTypeServiceUrl(String pokemonsUrl);
 
 }

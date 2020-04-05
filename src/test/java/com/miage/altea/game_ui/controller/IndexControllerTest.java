@@ -34,7 +34,7 @@ class IndexControllerTest {
     @Test
     void registerNewTrainer_shouldReturnAModelAndView(){
         var indexController = new IndexController();
-        var modelAndView = indexController.registerNewTrainer("Blue");
+        var modelAndView = indexController.registerTrainer("Blue");
 
         assertNotNull(modelAndView);
         assertEquals("register", modelAndView.getViewName());

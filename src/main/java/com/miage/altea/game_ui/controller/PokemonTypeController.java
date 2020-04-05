@@ -10,17 +10,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class PokemonTypeController {
 
     @Autowired
-    private PokemonTypeService pokemonTypeService;
+    private PokemonTypeService pokemonTypeS;
 
-    public void setPokemonTypeService(PokemonTypeService pokemonTypeService){
-        this.pokemonTypeService = pokemonTypeService;
+    public void setPokemonTypeS(PokemonTypeService pokemonTypeS){
+        this.pokemonTypeS = pokemonTypeS;
     }
 
     @GetMapping("/pokedex")
     public ModelAndView pokedex(){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("pokedex");
-        mav.addObject("pokemonTypes", pokemonTypeService.listPokemonsTypes());
+        mav.addObject("pokemonTypes", pokemonTypeS.listPokemonsTypes());
         return mav;
     }
 

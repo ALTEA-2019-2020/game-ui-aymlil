@@ -9,7 +9,7 @@ public interface TrainerService {
     List<Trainer> listTrainer();
 
     Trainer getTrainerByName(String name);
-    void setRestTemplate(RestTemplate restTemplate);
-    void setTrainerServiceUrl(String trainerServiceUrl);
+    void setTemplate(RestTemplate template);
+    void setTrainersUrl(String trainersUrl);
 
 }
